@@ -1,0 +1,90 @@
+package org.swinglife.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ * User Controller
+ * 
+ * @author 	Lian
+ * @date	2016年5月12日
+ * @since	1.0	
+ */
+@Controller
+public class UserController {
+
+	/**
+	 * 使用ModelAndView传递参数
+	 *
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value="login", method=RequestMethod.POST)
+	public ModelAndView login(String username, String password) {
+		if (this.checkParams(new String[] { username, password })) {
+			ModelAndView mav = new ModelAndView("succ");
+			mav.addObject("username", username);
+			mav.addObject("password", password);
+
+			return mav;
+		}
+
+		return new ModelAndView("home");
+	}
+
+	/**
+	 * 使用HttpServletRequest传递参数
+	 *
+	 * @param username
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="login2", method=RequestMethod.POST)
+	public ModelAndView login2(String username, String password, HttpServletRequest request) {
+		if (this.checkParams(new String[] { username, password })) {
+			ModelAndView mav = new ModelAndView("succ");
+			request.setAttribute("username", username);
+			request.setAttribute("password", password);
+
+			return mav;
+		}
+
+		return new ModelAndView("home");
+	}
+
+	/**
+	 * 使用Model得形式传递参数
+	 *
+	 * @param username
+	 * @param password
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="login3", method=RequestMethod.POST)
+	public String login3(String username, String password, Model model) {
+		if (this.checkParams(new String[] { username, password })) {
+			model.addAttribute("username", username);
+			model.addAttribute("password", password);
+
+			return "succ";
+		}
+
+		return "home";
+	}
+
+	private boolean checkParams(String[] params) {
+		for (String param : params) {
+			if (param == "" || param == null || param.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
