@@ -9,7 +9,7 @@
 	<!-- 加载spring的xml配置文件到 spring的上下文容器中 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:root-context.xml</param-value>
+		<param-value>classpath:applicationContext-spring.xml</param-value>
 	</context-param>
 
 	<!-- 监听spring上下文容器 -->
@@ -25,7 +25,7 @@
 		<init-param>
 			<!-- 加载SpringMVC的xml到 spring的上下文容器中 -->
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:mvc*.xml</param-value>
+			<param-value>classpath:applicationContext-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

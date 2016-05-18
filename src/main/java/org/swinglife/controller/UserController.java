@@ -18,6 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+
 	/**
 	 * 使用ModelAndView传递参数
 	 *
@@ -35,7 +40,7 @@ public class UserController {
 			return mav;
 		}
 
-		return new ModelAndView("home");
+		return new ModelAndView("login");
 	}
 
 	/**
@@ -56,7 +61,7 @@ public class UserController {
 			return mav;
 		}
 
-		return new ModelAndView("home");
+		return new ModelAndView("login");
 	}
 
 	/**
@@ -76,7 +81,7 @@ public class UserController {
 			return "succ";
 		}
 
-		return "home";
+		return "login";
 	}
 
 	private boolean checkParams(String[] params) {
